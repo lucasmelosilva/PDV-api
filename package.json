@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prepare": "husky"
   },
   "keywords": [],
   "author": "",
@@ -12,6 +13,8 @@
   "devDependencies": {
     "@types/node": "^20.11.19",
     "git-commit-msg-linter": "^5.0.6",
+    "husky": "^9.0.11",
+    "lint-staged": "^15.2.2",
     "typescript": "^5.3.3"
   },
   "dependencies": {
