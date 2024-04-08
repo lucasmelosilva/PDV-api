@@ -31,9 +31,15 @@ function makeRequest (): HttpRequest {
 
 describe('SignIn Controller', () => {
   it('should return 400 if Validation returns an error', async () => {
-    const { sut } = makeSut()
+    const { sut, validationStub } = makeSut()
+    jest.spyOn(validationStub, 'validate').mockImplementationOnce(async () => {
+      return await new Promise((resolve => resolve(new Error('Validation failed'))))
+    })
     const httpResponse = await sut.handle(makeRequest())
-    expect(httpResponse.status).toBe(400)
+    expect(httpResponse).toEqual({
+      status: 400,
+      body: new Error('Validation failed')
+    })
   })
 
   it('should call Validation with correct parameters', async () => {
