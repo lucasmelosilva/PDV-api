@@ -1,10 +1,25 @@
-import { type HttpRequest } from '../../protocols/http'
+import type { Validation } from '../../../validation/protocols/validation'
+import type { HttpRequest } from '../../protocols/http'
 import { ValidationStub } from './mocks/validation-stub'
 import { SignInController } from './signin-controller'
 
+interface SutType {
+  sut: SignInController
+  validationStub: Validation
+}
+
+function makeSut (): SutType {
+  const validationStub = new ValidationStub()
+  const sut = new SignInController(validationStub)
+  return {
+    sut,
+    validationStub
+  }
+}
+
 describe('SignIn Controller', () => {
   it('should return 400 if Validation returns an error', async () => {
-    const sut = new SignInController(new ValidationStub())
+    const { sut } = makeSut()
     const httpRequest: HttpRequest = {
       body: {
         registration: 9019589,
