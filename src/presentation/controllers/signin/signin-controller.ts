@@ -7,9 +7,11 @@ export class SignInController implements Controller {
   ) {}
 
   async handle (httpRequest: HttpRequest): Promise<HttpResponse> {
-    return await new Promise(resolve => resolve({
+    await this.validation.validate(httpRequest.body)
+
+    return {
       status: 400,
       body: {}
-    }))
+    }
   }
 }
