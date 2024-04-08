@@ -35,4 +35,12 @@ describe('SignIn Controller', () => {
     const httpResponse = await sut.handle(makeRequest())
     expect(httpResponse.status).toBe(400)
   })
+
+  it('should call Validation with correct parameters', async () => {
+    const { sut, validationStub } = makeSut()
+    const validateSpy = jest.spyOn(validationStub, 'validate')
+    const httpRequest = makeRequest()
+    await sut.handle(httpRequest)
+    expect(validateSpy).toHaveBeenCalledWith(httpRequest.body)
+  })
 })
