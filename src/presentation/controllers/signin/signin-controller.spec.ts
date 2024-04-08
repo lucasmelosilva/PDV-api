@@ -3,6 +3,8 @@ import type { HttpRequest } from '../../protocols/http'
 import { ValidationStub } from './mocks/validation-stub'
 import { SignInController } from './signin-controller'
 
+import { badRequest } from '../../helpers/http-helper'
+
 interface SutType {
   sut: SignInController
   validationStub: Validation
@@ -36,10 +38,7 @@ describe('SignIn Controller', () => {
       return await new Promise((resolve => resolve(new Error('Validation failed'))))
     })
     const httpResponse = await sut.handle(makeRequest())
-    expect(httpResponse).toEqual({
-      status: 400,
-      body: new Error('Validation failed')
-    })
+    expect(httpResponse).toEqual(badRequest(new Error('Validation failed')))
   })
 
   it('should call Validation with correct parameters', async () => {
