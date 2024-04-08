@@ -17,19 +17,22 @@ function makeSut (): SutType {
   }
 }
 
+function makeRequest (): HttpRequest {
+  return {
+    body: {
+      registration: 9019589,
+      cpf: '12459387501',
+      name: 'John Doe',
+      dateOfBirth: new Date(),
+      role: 'Manager'
+    }
+  }
+}
+
 describe('SignIn Controller', () => {
   it('should return 400 if Validation returns an error', async () => {
     const { sut } = makeSut()
-    const httpRequest: HttpRequest = {
-      body: {
-        registration: 9019589,
-        cpf: '12459387501',
-        name: 'John Doe',
-        dateOfBirth: new Date(),
-        role: 'Manager'
-      }
-    }
-    const httpResponse = await sut.handle(httpRequest)
+    const httpResponse = await sut.handle(makeRequest())
     expect(httpResponse.status).toBe(400)
   })
 })
