@@ -7,6 +7,6 @@ export interface EmployeeModel {
   registration: number
   cpf: string
   nome: string
-  bothDate: Date
+  dateOfBirth: Date
   role: Role
 }
