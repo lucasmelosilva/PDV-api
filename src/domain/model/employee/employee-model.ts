@@ -1,12 +1,7 @@
-enum Role {
-  Manager = 'Manager',
-  Cashier = 'Cashier'
-}
-
 export interface EmployeeModel {
   registration: number
   cpf: string
-  nome: string
+  name: string
   dateOfBirth: Date
-  role: Role
+  role: string
 }
